@@ -1,0 +1,82 @@
+:root {
+  --color-primary: #3b8fb7;
+  --page-font: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande";
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  background-color: #3b8fb7;
+  display: flex;
+  width: 100vw;
+}
+
+.navbar h1 {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: white;
+  align-content: center;
+}
+
+h1 {
+  font-family: var(--page-font);
+  color: #3b8fb7;
+  align-content: center;
+}
+
+.container {
+  max-width: 75vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+.card {
+  border-radius: 40px;
+  border: 2px #3b8fb7 solid;
+  font-family: var(--page-font);
+  padding: 10px;
+  margin: 5px;
+  padding-left: 20px;
+  width: 30vw;
+}
+
+.todo-input {
+  /* max-width: 500vw; */
+  font-family: var(--page-font);
+  color: var(--color-primary);
+  font-size: large;
+  transition: border-width 0.1s linear;
+}
+
+.todo-input:focus {
+  outline: #3b8fb7;
+  border-width: 3px;
+  box-shadow: 0px 0px 0px 3px #3b90b726;
+}
+
+.button {
+  /* border-color: white; */
+  border-radius: 40px;
+  padding-left: 10px;
+  width: 65px;
+  font-family: var(--page-font);
+  background-color: #3b8fb7;
+  color: #ffffff;
+  font-size: medium;
+  font-style: bold;
+  cursor: pointer;
+  transition: display 0.8s linear;
+}
+
+.flex-box {
+  display: flex;
+  align-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
