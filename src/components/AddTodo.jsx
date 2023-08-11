@@ -1,13 +1,22 @@
 import { useState } from "react";
 
 function AddTodo(props) {
-  const [btn, setBtn] = useState("block");
+  const [btn, setBtn] = useState("hidden");
   const [todo, setTodo] = useState("");
 
   const handleAdd = () => {
     props.addTodo(todo);
-    setBtn("none");
+    setBtn("hidden");
     setTodo("");
+  };
+
+  const handleClick = (event) => {
+    if (event.target.value !== "") {
+      setTodo(event.target.value);
+      setBtn("visible");
+    } else {
+      setBtn("hidden");
+    }
   };
 
   return (
@@ -19,18 +28,21 @@ function AddTodo(props) {
         name="fname"
         placeholder="Type here..."
         value={todo}
-        onChange={(event) => {
-          setTodo(event.target.value);
-          setBtn("block");
-        }}
+        onChange={handleClick}
       />
 
       <button
         className="card button"
         onClick={handleAdd}
-        style={{ display: btn }}
+        style={{
+          visibility: btn,
+          padding: "3px",
+          width: "45px",
+          height: "45px",
+          borderRadius: "100%",
+        }}
       >
-        ADD
+        <a style={{ fontSize: "30px" }}>&#43;</a>
       </button>
     </section>
   );

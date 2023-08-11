@@ -5,16 +5,19 @@ import Navbar from "./components/Navbar.jsx";
 import TodoItem from "./components/TodoItem.jsx";
 import AddTodo from "./components/AddTodo.jsx";
 import { v4 as uuid } from "uuid";
+import Modal from "./components/Modal.jsx";
 
 function App() {
-  const [todos, setTodos] = useState([
-    // { name: "Todo one...." },
-    // { name: "Todo two...." },
-  ]);
+  const [todos, setTodos] = useState([]);
   const [head, setHead] = useState("Amazing things To Do!");
-  console.log(todos);
+  const [modalDisplay, setmodalDisplay] = useState(true);
 
-  // const add = (a, b) => a + b;
+  console.log(todos);
+  console.log(modalDisplay);
+
+  const toggleModal = (state) => {
+    setmodalDisplay(state);
+  };
 
   const addTodo = (todo) => {
     setTodos((prev) => [...prev, { name: todo, completed: false, id: uuid() }]);
@@ -45,7 +48,7 @@ function App() {
   return (
     <>
       <Navbar heading={head} />
-
+      <Modal state={modalDisplay} toggleModal={toggleModal} />
       <div className="container">
         <h1>Add New ToDo</h1>
         <AddTodo addTodo={addTodo} />
@@ -65,6 +68,7 @@ function App() {
                 updateTodo={updateTodo}
                 markTodo={markTodo}
                 todo={todo}
+                toggleModal={toggleModal}
               />
             ))}
           </>

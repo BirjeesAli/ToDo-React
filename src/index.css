@@ -22,7 +22,8 @@ html {
   align-content: center;
 }
 
-h1 {
+h1,
+h2 {
   font-family: var(--page-font);
   color: #3b8fb7;
   align-content: center;
@@ -43,6 +44,7 @@ h1 {
   margin: 5px;
   padding-left: 20px;
   width: 30vw;
+  background-color: white;
 }
 
 .todo-input {
@@ -70,13 +72,27 @@ h1 {
   font-size: medium;
   font-style: bold;
   cursor: pointer;
-  transition: display 0.8s linear;
 }
 
 .flex-box {
   display: flex;
   align-content: space-evenly;
   align-items: center;
-  flex-wrap: wrap;
   justify-content: center;
+}
+
+.flex-item {
+  align-self: "center";
+}
+
+.modal {
+  /* display: "none"; */
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-item {
+  width: 35vw;
 }
