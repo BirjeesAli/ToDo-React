@@ -9,15 +9,8 @@ import Modal from "./components/Modal.jsx";
 function App() {
   const [todos, setTodos] = useState([]);
   const [head, setHead] = useState("Amazing things To Do!");
-  const [modalDisplay, setmodalDisplay] = useState(true);
+  const [modalDisplay, setmodalDisplay] = useState(false);
   const [editedTodo, setEditedTodo] = useState({ id: "", name: "" });
-
-  console.log("editied change:", editedTodo);
-  // console.log(modalDisplay);
-
-  // const toggleModal = (state) => {
-  //   setmodalDisplay(state);
-  // };
 
   const addTodo = (todo) => {
     setTodos((prev) => [...prev, { name: todo, completed: false, id: uuid() }]);

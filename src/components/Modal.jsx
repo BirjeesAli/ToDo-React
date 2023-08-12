@@ -1,14 +1,27 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
-function Modal({ state, setmodalDisplay, editedTodo, setEditedTodo }) {
+function Modal({
+  state,
+  setmodalDisplay,
+  editedTodo,
+  setEditedTodo,
+  updateTodo,
+}) {
   const modalRef = useRef(null);
+  const [valid, setValid] = useState(true);
 
   const handleChange = (e) => {
     setEditedTodo((prev) => ({ ...prev, name: e.target.value }));
+    if (e.target.value === "") {
+      setValid(false);
+    } else {
+      setValid(true);
+    }
   };
 
   const handleChangeSave = () => {
-    setEditedTodo({ id: todo.id, name: todoText });
+    updateTodo(editedTodo.id, editedTodo.name);
+    setmodalDisplay(false);
   };
 
   return (
@@ -52,6 +65,7 @@ function Modal({ state, setmodalDisplay, editedTodo, setEditedTodo }) {
         />
         <button
           className="card button"
+          disabled={valid ? false : true}
           style={{ alignSelf: "flex-end" }}
           onClick={handleChangeSave}
         >

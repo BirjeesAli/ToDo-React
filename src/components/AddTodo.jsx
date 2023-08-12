@@ -1,21 +1,21 @@
 import { useState } from "react";
 
 function AddTodo(props) {
-  const [btn, setBtn] = useState("hidden");
+  const [btn, setBtn] = useState("none");
   const [todo, setTodo] = useState("");
 
   const handleAdd = () => {
     props.addTodo(todo);
-    setBtn("hidden");
+    setBtn("none");
     setTodo("");
   };
 
   const handleClick = (event) => {
-    if (event.target.value !== "") {
-      setTodo(event.target.value);
-      setBtn("visible");
+    setTodo(event.target.value);
+    if (event.target.value === "") {
+      setBtn("none");
     } else {
-      setBtn("hidden");
+      setBtn("block");
     }
   };
 
@@ -35,7 +35,7 @@ function AddTodo(props) {
         className="card button"
         onClick={handleAdd}
         style={{
-          visibility: btn,
+          display: btn,
           padding: "3px",
           width: "45px",
           height: "45px",
