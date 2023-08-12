@@ -1,49 +1,59 @@
-function Modal({ state, toggleModal }) {
-  console.log("got modal state:", state);
-  const handleChange = () => {};
+import { useRef } from "react";
+
+function Modal({ state, setmodalDisplay, editedTodo, setEditedTodo }) {
+  const modalRef = useRef(null);
+
+  const handleChange = (e) => {
+    setEditedTodo((prev) => ({ ...prev, name: e.target.value }));
+  };
+
+  const handleChangeSave = () => {
+    setEditedTodo({ id: todo.id, name: todoText });
+  };
+
   return (
     <div
       className="modal flex-box"
-      style={{ visibility: state ? "visible" : "hidden" }}
-      onClick={() => toggleModal(false)}
+      ref={modalRef}
+      style={{ display: state ? "flex" : "none" }}
+      onClick={(e) => {
+        if (modalRef.current === e.target) setmodalDisplay(false);
+      }}
     >
       <div
         className="card modal-item flex-box"
-        style={{ flexDirection: "column" }}
+        style={{ flexDirection: "column", paddingLeft: "10px" }}
       >
         <div
           className="flex-box"
-          style={{ alignSelf: "space-between", paddingLeft: "10px" }}
+          style={{
+            width: "99%",
+            justifyContent: "space-between",
+            paddingLeft: "5px",
+          }}
         >
           <h2 className="flex-item">Edit Todo</h2>
 
           <button
-            className="card button"
-            style={{
-              backgroundColor: "#d92424fa",
-              borderColor: "#d92424fa",
-              padding: "3px",
-              width: "45px",
-              height: "45px",
-              borderRadius: "100%",
-            }}
-            onClick={() => deleteTodo(todo.id)}
+            className="card del-btn"
+            onClick={() => setmodalDisplay(false)}
           >
             <a style={{ fontSize: "30px" }}>&#215;</a>
           </button>
         </div>
         <input
-          className="card todo-input"
+          className="card todo-input flex-item"
           type="text"
           id="fname"
           name="fname"
           placeholder="Type here..."
-          // value=''
-          onChange={handleChange}
+          value={editedTodo.name}
+          onChange={(e) => handleChange(e)}
         />
         <button
           className="card button"
-          style={{ alignSelf: "flex-end", marginRight: "10px" }}
+          style={{ alignSelf: "flex-end" }}
+          onClick={handleChangeSave}
         >
           Save
         </button>

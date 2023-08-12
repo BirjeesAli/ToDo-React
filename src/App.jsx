@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ButtonCmpt from "./components/Button.jsx";
 import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import TodoItem from "./components/TodoItem.jsx";
@@ -11,13 +10,14 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [head, setHead] = useState("Amazing things To Do!");
   const [modalDisplay, setmodalDisplay] = useState(true);
+  const [editedTodo, setEditedTodo] = useState({ id: "", name: "" });
 
-  console.log(todos);
-  console.log(modalDisplay);
+  console.log("editied change:", editedTodo);
+  // console.log(modalDisplay);
 
-  const toggleModal = (state) => {
-    setmodalDisplay(state);
-  };
+  // const toggleModal = (state) => {
+  //   setmodalDisplay(state);
+  // };
 
   const addTodo = (todo) => {
     setTodos((prev) => [...prev, { name: todo, completed: false, id: uuid() }]);
@@ -32,13 +32,15 @@ function App() {
     );
   };
 
-  const markTodo = (e, id) => {
-    setTodos((prev) =>
-      prev.map((todo) => {
+  const markTodo = (id) => {
+    setTodos((prev) => {
+      return prev.map((todo) => {
         if (todo.id !== id) return todo;
-        return { ...todo, completed: !todo.completed };
-      })
-    );
+        const newTodo = { ...todo };
+        newTodo.completed = !newTodo.completed;
+        return newTodo;
+      });
+    });
   };
 
   const deleteTodo = (id) => {
@@ -48,7 +50,13 @@ function App() {
   return (
     <>
       <Navbar heading={head} />
-      <Modal state={modalDisplay} toggleModal={toggleModal} />
+      <Modal
+        state={modalDisplay}
+        setmodalDisplay={setmodalDisplay}
+        editedTodo={editedTodo}
+        setEditedTodo={setEditedTodo}
+        updateTodo={updateTodo}
+      />
       <div className="container">
         <h1>Add New ToDo</h1>
         <AddTodo addTodo={addTodo} />
@@ -68,7 +76,8 @@ function App() {
                 updateTodo={updateTodo}
                 markTodo={markTodo}
                 todo={todo}
-                toggleModal={toggleModal}
+                setmodalDisplay={setmodalDisplay}
+                setEditedTodo={setEditedTodo}
               />
             ))}
           </>
